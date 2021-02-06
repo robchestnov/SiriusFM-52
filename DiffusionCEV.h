@@ -13,19 +13,21 @@ namespace SiriusFM{
             double const const_sigma;
             double const beta;
         public:
-            double mu(double St, double t){
+            double mu(double St, double t) const{
                 return const_mu*St;
             }
-            double sigma(double St, double t){
+            double sigma(double St, double t) const{
                 if(beta<0){return 0;}
                 if(const_sigma<=0){return 0;}
                 if(beta<0){return 0;}
                 return const_sigma*pow(St, beta);
             }
-        DifffusionCEV(double const_m, double const_s, double const_beta)
-        :const_mu(const_m)
-         const_sigma(const_s)
+        DiffusionCEV(double const_m, double const_s, double const_beta)
+        :const_mu(const_m),
+         const_sigma(const_s),
          beta(const_beta)
-        if(const_sigma<=0 || beta < 0){throw std::invalid_argument('Bad arguments');}
-    }
+         {
+            if((const_sigma<=0) || beta < 0){throw std::invalid_argument("Bad arguments");}
+         }
+    };
 }
